@@ -136,37 +136,30 @@ async function loadJsonl(){
   }catch(e){console.warn('load error',e)}
 }
 
-function createProofElement(id, proof){
-  const pre = document.createElement('pre');
-  pre.className = 'proof-text';
-  pre.textContent = proof || '(no proof field)';
-  pre.style.display = 'block';
-  return pre;
+// 侧栏：显示 proof 的元素
+function showSidebarProof(id){
+  const node = nodeMap[id];
+  const proof = node ? (node.proof || node.fs || '(no proof)') : '(node not found)';
+  const sidebar = document.getElementById('proof-sidebar');
+  const content = document.getElementById('proof-sidebar-content');
+  if(!sidebar || !content) return;
+  content.textContent = proof;
+  sidebar.classList.add('open');
 }
 
-function toggleProofFor(elem, id){
-  // find existing proof sibling
-  const li = elem.closest('li') || elem.closest('details') || elem.parentElement;
-  if(!li) return;
-  let existing = li.querySelector(':scope > .proof-text');
-  if(existing){ existing.remove(); return; }
-  const node = nodeMap[id];
-  const proof = node ? node.proof || node.fs || '(no proof)' : '(node not found)';
-  const pre = createProofElement(id, proof);
-  pre.addEventListener('click', e=> e.stopPropagation());
-  li.appendChild(pre);
+function hideSidebar(){
+  const sidebar = document.getElementById('proof-sidebar');
+  if(!sidebar) return; sidebar.classList.remove('open');
 }
 
 function bindHandlers(){
   // attach to any element with data-node-id
   document.querySelectorAll('.node-name[data-node-id]').forEach(el=>{
     el.style.cursor = 'pointer';
-    el.addEventListener('click', (ev)=>{
-      // prevent the <summary> default toggle when clicking the name
-      ev.preventDefault();
+    el.addEventListener('dblclick', (ev)=>{
       ev.stopPropagation();
       const id = el.getAttribute('data-node-id');
-      toggleProofFor(el, id);
+      showSidebarProof(id);
     });
   });
 }
@@ -177,6 +170,25 @@ document.addEventListener('DOMContentLoaded', async ()=>{
 });
 </script>
 
+<script>
+// 侧栏关闭按钮绑定
+document.addEventListener('click', (ev)=>{
+  const close = document.querySelector('#proof-sidebar .close-btn');
+  if(close) close.addEventListener('click', (e)=>{ e.stopPropagation(); hideSidebar(); });
+});
+</script>
+
+<!-- 侧栏样式与容器 -->
 <style>
-  .proof-text{white-space:pre-wrap;background:#0b12201a;border-left:4px solid #2563eb;padding:10px;margin:8px 0 8px 36px;border-radius:6px;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,monospace}
+  #proof-sidebar{position:fixed;right:-44%;top:56px;width:40%;max-width:640px;height:78%;background:#ffffff;border-left:1px solid rgba(15,23,42,0.06);box-shadow:0 8px 30px rgba(2,6,23,0.12);transition:right .18s ease-in-out;padding:12px;z-index:80;overflow:auto;border-radius:8px 0 0 8px}
+  #proof-sidebar.open{right:16px}
+  #proof-sidebar .close-btn{position:absolute;left:8px;top:8px;background:#ef4444;color:#fff;border:none;padding:6px 8px;border-radius:6px;cursor:pointer}
+  #proof-sidebar h3{margin:0 0 8px 0;font-size:1rem}
+  #proof-sidebar-content{white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,monospace;font-size:0.5rem;line-height:1.45;color:#0b1220;padding-top:28px}
 </style>
+
+<div id="proof-sidebar" aria-hidden="true">
+  <button class="close-btn" aria-label="close">×</button>
+  <h3>Proof</h3>
+  <div id="proof-sidebar-content">(双击节点以显示 proof)</div>
+</div>
