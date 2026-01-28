@@ -108,19 +108,51 @@ permalink: /putnam_2025_b3/
 
   /* 节点矩形框（所有节点统一为圆角矩形） */
   /* summary 左侧留出与水平线对接的位置 */
-  summary{display:inline-flex;align-items:center;gap:.5rem;padding:6px 8px;border-radius:8px;cursor:pointer;transition:background .12s,box-shadow .12s;position:relative;padding-left:56px}
+  summary{display:inline-flex;align-items:center;gap:.5rem;padding:6px 8px;border-radius:8px;cursor:pointer;transition:background .12s,box-shadow .12s;position:relative;margin-left:28px}
   summary:hover{background:#fbfdff}
   summary::-webkit-details-marker{display:none}
-  /*summary:before{content:'▸';position:absolute;left:8px;top:50%;transform:translateY(-50%) rotate(0);color:#1f2937;transition:transform .12s}*/
-  /*details[open] > summary:before{transform:translateY(-50%) rotate(90deg)}*/
 
-  .node-name{display:inline-block;padding:8px 12px;border-radius:10px;border:2px solid #0b61d1;background:linear-gradient(#f0f6ff,#e6f2ff);color:#0b1220}
+  .node-name{display:inline-block;padding:8px 12px;margin-left: 28px;border-radius:10px;border:2px solid #0b61d1;background:linear-gradient(#f0f6ff,#e6f2ff);color:#0b1220;position:relative;z-index:2}
 
-  /* 保证节点框位于连线之上，避免被覆盖 */
-  .node-name{position:relative;z-index:2}
+  /* 修复：从有子节点的节点下方引出垂直线 */
+  .tree-list > li:has(details)::after{
+    content:'';
+    position:absolute;
+    left:28px;
+    top:calc(50% + 22px); /* 从节点的垂直中心再往下一点开始 */
+    bottom:0;
+    width:4px;
+    background:#1f2937;
+    z-index:1;
+  }
 
-  /* 细节调整：内嵌列表的节点缩进更明显 */
-  .tree-list .tree-list{padding-left:48px}
+  /* 调整嵌套列表的垂直主线位置 */
+  .tree-list .tree-list{
+    padding-left:56px;
+  }
+  .tree-list .tree-list::before{
+    left:28px;
+  }
+  .tree-list .tree-list > li::before{
+    left:28px;
+  }
+
+  /* 确保最外层容器的details有正确的连线 */
+  .tree-container > details{
+    position:relative;
+  }
+  
+  /* 修复最外层details的垂直主线 */
+  .tree-container > details:has(.tree-list)::after{
+    content:'';
+    position:absolute;
+    left:28px;
+    top:calc(50% + 22px); /* 从summary中心往下 */
+    bottom:0;
+    width:4px;
+    background:#1f2937;
+    z-index:1;
+  }
 
   /* 标题样式 */
   .container h2{margin-bottom:.25rem}
