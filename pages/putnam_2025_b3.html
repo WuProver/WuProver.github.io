@@ -97,18 +97,18 @@ permalink: /putnam_2025_b3/
 
   /* 垂直主线（每个子列表左侧） */
   .tree-list{list-style:none;margin:0;padding-left:48px;position:relative}
-  .tree-list::before{content:'';position:absolute;left:24px;top:0;bottom:0;width:3px;background:#1f2937;border-radius:3px;opacity:0.9}
+  .tree-list::before{content:'';position:absolute;left:24px;top:0;bottom:0;width:3px;background:#002FA7;border-radius:3px;opacity:0.9}
 
   /* 每个节点与主线用水平线连接 */
   .tree-list > li{position:relative;margin:12px 0;padding-left:12px}
-  .tree-list > li::before{content:'';position:absolute;left:24px;top:22px;width:20px;height:3px;background:#1f2937;border-radius:2px}
+  .tree-list > li::before{content:'';position:absolute;left:24px;top:22px;width:20px;height:3px;background:#002FA7;border-radius:2px}
 
   /* 节点矩形框（所有节点统一为圆角矩形） */
-  summary{display:inline-flex;align-items:center;gap:.5rem;padding:6px 8px;border-radius:8px;cursor:pointer;transition:background .12s,box-shadow .12s;position:relative;padding-left:36px}
+  summary{display:inline-flex;align-items:center;gap:.5rem;padding:6px 8px;border-radius:8px;cursor:pointer;transition:background .12s,box-shadow .12s;position:relative}/*;padding-left:36px}*/
   summary:hover{background:#fbfdff}
   summary::-webkit-details-marker{display:none}
-  summary:before{content:'▸';position:absolute;left:8px;top:50%;transform:translateY(-50%) rotate(0);color:#1f2937;transition:transform .12s}
-  details[open] > summary:before{transform:translateY(-50%) rotate(90deg)}
+  /*summary:before{content:'▸';position:absolute;left:8px;top:50%;transform:translateY(-50%) rotate(0);color:#1f2937;transition:transform .12s}*/
+  /*details[open] > summary:before{transform:translateY(-50%) rotate(90deg)}*/
 
   .node-name{display:inline-block;padding:8px 12px;border-radius:10px;border:1px solid #1e40af;background:linear-gradient(#f0f6ff,#e6f2ff);color:#0b1220}
 
