@@ -9,21 +9,20 @@ permalink: /putnam_2025_b3/
 
 <div class="tree-container container">
   <details open>
-    <summary data-node-id="putnam_2025_b3">putnam_2025_b3</summary>
+    <summary><span class="node-name" data-node-id="putnam_2025_b3">putnam_2025_b3</span></summary>
     <ul class="tree-list">
       <li>
         <details>
           <summary><span class="node-name" data-node-id="putnam_2025_b3--0">putnam_2025_b3--0</span></summary>
           <ul class="tree-list">
             <li><span class="node-name" data-node-id="putnam_2025_b3--0--0">putnam_2025_b3--0--0</span></li>
-            <li><span class="node-name" data-node-id="putnam_2025_b3--0--3">putnam_2025_b3--0--3</span></li>
+            <li><span class="node-name" data-node-id="putnam_2025_b3--0--1">putnam_2025_b3--0--1</span></li>
             <li><span class="node-name" data-node-id="putnam_2025_b3--0--2">putnam_2025_b3--0--2</span></li>
             <li>
               <details>
                 <summary><span class="node-name" data-node-id="putnam_2025_b3--0--4">putnam_2025_b3--0--4</span></summary>
                 <ul class="tree-list">
                   <li><span class="node-name" data-node-id="putnam_2025_b3--0--4--0">putnam_2025_b3--0--4--0</span></li>
-                  <li><span class="node-name" data-node-id="putnam_2025_b3--0--4--3">putnam_2025_b3--0--4--3</span></li>
                   <li>
                     <details>
                       <summary><span class="node-name" data-node-id="putnam_2025_b3--0--4--1">putnam_2025_b3--0--4--1</span></summary>
@@ -56,8 +55,6 @@ permalink: /putnam_2025_b3/
                       </ul>
                     </details>
                   </li>
-                  <li><span class="node-name" data-node-id="putnam_2025_b3--0--4--4">putnam_2025_b3--0--4--4</span></li>
-                  <li><span class="node-name" data-node-id="putnam_2025_b3--0--4--7">putnam_2025_b3--0--4--7</span></li>
                   <li>
                     <details>
                       <summary><span class="node-name" data-node-id="putnam_2025_b3--0--4--2">putnam_2025_b3--0--4--2</span></summary>
@@ -70,12 +67,15 @@ permalink: /putnam_2025_b3/
                       </ul>
                     </details>
                   </li>
+                  <li><span class="node-name" data-node-id="putnam_2025_b3--0--4--3">putnam_2025_b3--0--4--3</span></li>
+                  <li><span class="node-name" data-node-id="putnam_2025_b3--0--4--4">putnam_2025_b3--0--4--4</span></li>
                   <li><span class="node-name" data-node-id="putnam_2025_b3--0--4--5">putnam_2025_b3--0--4--5</span></li>
                   <li><span class="node-name" data-node-id="putnam_2025_b3--0--4--6">putnam_2025_b3--0--4--6</span></li>
+                  <li><span class="node-name" data-node-id="putnam_2025_b3--0--4--7">putnam_2025_b3--0--4--7</span></li>
                 </ul>
               </details>
             </li>
-            <li><span class="node-name" data-node-id="putnam_2025_b3--0--1">putnam_2025_b3--0--1</span></li>
+            <li><span class="node-name" data-node-id="putnam_2025_b3--0--3">putnam_2025_b3--0--3</span></li>
           </ul>
         </details>
       </li>
@@ -96,21 +96,28 @@ permalink: /putnam_2025_b3/
   .tree-container details{margin:8px 0}
 
   /* 垂直主线（每个子列表左侧） */
-  .tree-list{list-style:none;margin:0;padding-left:48px;position:relative}
-  .tree-list::before{content:'';position:absolute;left:24px;top:0;bottom:0;width:3px;background:#002FA7;border-radius:3px;opacity:0.9}
+  .tree-list{list-style:none;margin:0;padding-left:56px;position:relative}
+  .tree-list::before{content:'';position:absolute;left:28px;top:0;bottom:0;width:4px;background:#1f2937;border-radius:3px;opacity:0.95}
 
-  /* 每个节点与主线用水平线连接 */
+  /* 每个节点与主线用水平线连接（无论是否有子节点都显示） */
   .tree-list > li{position:relative;margin:12px 0;padding-left:12px}
-  .tree-list > li::before{content:'';position:absolute;left:24px;top:22px;width:20px;height:3px;background:#002FA7;border-radius:2px}
+  .tree-list > li::before{content:'';position:absolute;left:28px;top:22px;width:28px;height:4px;background:#1f2937;border-radius:2px}
+
+  /* 根节点也需要水平连线，和其它节点对齐 */
+  .tree-container > details > summary::before{content:'';position:absolute;left:28px;top:50%;transform:translateY(-50%);width:28px;height:4px;background:#1f2937;border-radius:2px}
 
   /* 节点矩形框（所有节点统一为圆角矩形） */
-  summary{display:inline-flex;align-items:center;gap:.5rem;padding:6px 8px;border-radius:8px;cursor:pointer;transition:background .12s,box-shadow .12s;position:relative}/*;padding-left:36px}*/
+  /* summary 左侧留出与水平线对接的位置 */
+  summary{display:inline-flex;align-items:center;gap:.5rem;padding:6px 8px;border-radius:8px;cursor:pointer;transition:background .12s,box-shadow .12s;position:relative;padding-left:56px}
   summary:hover{background:#fbfdff}
   summary::-webkit-details-marker{display:none}
   /*summary:before{content:'▸';position:absolute;left:8px;top:50%;transform:translateY(-50%) rotate(0);color:#1f2937;transition:transform .12s}*/
   /*details[open] > summary:before{transform:translateY(-50%) rotate(90deg)}*/
 
-  .node-name{display:inline-block;padding:8px 12px;border-radius:10px;border:1px solid #1e40af;background:linear-gradient(#f0f6ff,#e6f2ff);color:#0b1220}
+  .node-name{display:inline-block;padding:8px 12px;border-radius:10px;border:2px solid #0b61d1;background:linear-gradient(#f0f6ff,#e6f2ff);color:#0b1220}
+
+  /* 保证节点框位于连线之上，避免被覆盖 */
+  .node-name{position:relative;z-index:2}
 
   /* 细节调整：内嵌列表的节点缩进更明显 */
   .tree-list .tree-list{padding-left:48px}
@@ -180,9 +187,9 @@ document.addEventListener('click', (ev)=>{
 
 <!-- 侧栏样式与容器 -->
 <style>
-  #proof-sidebar{position:fixed;right:-44%;top:56px;width:40%;max-width:640px;height:78%;background:#ffffff;border-left:1px solid rgba(15,23,42,0.06);box-shadow:0 8px 30px rgba(2,6,23,0.12);transition:right .18s ease-in-out;padding:12px;z-index:80;overflow:auto;border-radius:8px 0 0 8px}
+  #proof-sidebar{position:fixed;right:-44%;bottom:56px;width:40%;max-width:640px;height:78%;background:#ffffff;border-left:1px solid rgba(15,23,42,0.06);box-shadow:0 8px 30px rgba(2,6,23,0.12);transition:right .18s ease-in-out;padding:12px;z-index:80;overflow:auto;border-radius:8px 0 0 8px}
   #proof-sidebar.open{right:16px}
-  #proof-sidebar .close-btn{position:absolute;left:8px;top:8px;background:#ef4444;color:#fff;border:none;padding:6px 8px;border-radius:6px;cursor:pointer}
+  #proof-sidebar .close-btn{position:absolute;right:8px;top:8px;background:#ef4444;color:#fff;border:none;padding:6px 8px;border-radius:6px;cursor:pointer}
   #proof-sidebar h3{margin:0 0 8px 0;font-size:1rem}
   #proof-sidebar-content{white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,monospace;font-size:0.5rem;line-height:1.45;color:#0b1220;padding-top:28px}
 </style>
