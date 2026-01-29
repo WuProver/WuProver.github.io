@@ -54,7 +54,7 @@ permalink: /putnam_2025_b3/
     border-radius: 50%;
     background: rgba(190, 238, 208, 1);
     color: #064e3b;
-    border: 2px solid rgba(16, 185, 129, 0.95);
+    border: solid #B0BEC5;
     box-shadow: 0 3px 8px rgba(2, 6, 23, 0.08);
     text-align: center;
     font-family: 'Segoe UI', system-ui, sans-serif;
@@ -71,53 +71,82 @@ permalink: /putnam_2025_b3/
   }
 
   .node:hover .node-content {
-    background: rgba(190, 238, 208, 1);
-    border-color: rgba(16, 185, 129, 1);
-    box-shadow: 0 4px 12px rgba(2, 6, 23, 0.12);
+    /* 保持每级的主色，hover 只做轻微高亮和放大，不覆盖背景色 */
+    filter: brightness(1.04);
+    box-shadow: 0 6px 16px rgba(2, 6, 23, 0.14);
     transform: scale(1.05);
   }
 
   /* 节点层级大小 */
+  /* 各级统一绿色系：级数越高颜色越浅（0 为根，颜色最深） */
   .node[data-level="0"] .node-content {
     width: 12%;
     height: 12%;
     font-size: 3vmin;
+    background: #68BECA;
+    color: #e6fff6; /* 亮色文字以保证可读性 */
+    border: 3.5px;
+    /* border-color: #044936; */
   }
 
   .node[data-level="1"] .node-content {
     width: 10%;
     height: 10%;
     font-size: 2vmin;
+    background: #82C9D4; /* 中深绿 */
+    color: #e9fff5;
+    border: 3px;
+    /* border-color: #0c8a5f; */
   }
 
   .node[data-level="2"] .node-content {
     width: 8%;
     height: 8%;
     font-size: 1.5vmin;
+    background: #9CD4DE; /* 亮绿 */
+    color: #e9fff5;
+    border: 2.5px;
+    /* border-color: #2bb07f; */
   }
 
   .node[data-level="3"] .node-content {
     width: 7%;
     height: 7%;
     font-size: 1vmin;
+    background: #B7DFE8;
+    color: #064e3b;
+    border: 2px;
+    /* border-color: #4fd1a6; */
   }
 
   .node[data-level="4"] .node-content {
     width: 6%;
     height: 6%;
     font-size: 0.8vmin;
+    background: #D3EAF2;
+    color: #064e3b;
+    border: 1.5px;
+    /* border-color: #86e8b9; */
   }
 
   .node[data-level="5"] .node-content {
     width: 5%;
     height: 4%;
     font-size: 0.6vmin;
+    background: #E8F4F8;
+    color: #064e3b;
+    border: 1px;
+    /* border-color: rgba(16, 185, 129, 0.95); */
   }
 
   .node[data-level="6"] .node-content {
     width: 4%;
     height: 3%;
     font-size: 0.5vmin;
+    background: rgba(230, 240, 250, 1); /* 更浅的绿色 */
+    color: #064e3b;
+    border: 0.5px;
+    /* border-color: rgba(100, 200, 160, 0.6); */
   }
 
   /* 节点定位（基于你的布局） */
@@ -237,8 +266,8 @@ permalink: /putnam_2025_b3/
   }
 
   .node[data-id="putnam_2025_b3--0--4--1--2--0--0"] {
-    left: 95%;
-    top: 17%;
+    left: 92%;
+    top: 14%;
   }
 
   .node[data-id="putnam_2025_b3--0--4--2--0"] {
@@ -420,6 +449,7 @@ permalink: /putnam_2025_b3/
     
     nodes.forEach(node => {
       const parentId = node.getAttribute('data-parent');
+      const level = node.getAttribute('data-level');
       if (!parentId) return;
       
       const parentNode = document.querySelector(`.node[data-id="${parentId}"]`);
@@ -438,8 +468,8 @@ permalink: /putnam_2025_b3/
       line.setAttribute('y1', parentY);
       line.setAttribute('x2', nodeX);
       line.setAttribute('y2', nodeY);
-      line.setAttribute('stroke', 'rgba(16, 185, 129, 0.8)');
-      line.setAttribute('stroke-width', '2');
+      line.setAttribute('stroke', '#B0BEC5');
+      line.setAttribute('stroke-width', `${4.5 - level/1.5}`);
       
       svg.appendChild(line);
     });
@@ -649,6 +679,7 @@ permalink: /putnam_2025_b3/
 </script>
 
 <style>
+  /* 侧栏：浅绿色主题，与页面说明块保持视觉一致 */
   #proof-sidebar {
     position: fixed;
     right: -44%;
@@ -656,25 +687,26 @@ permalink: /putnam_2025_b3/
     width: 40%;
     max-width: 640px;
     height: 78%;
-    background: #ffffff;
-    border-left: 1px solid rgba(15, 23, 42, 0.06);
-    box-shadow: 0 8px 30px rgba(2, 6, 23, 0.12);
-    transition: right .18s ease-in-out;
-    padding: 12px;
+    background: linear-gradient(180deg, rgba(240, 255, 244, 1), rgba(255,255,255,1));
+    border-left: 1px solid rgba(16, 185, 129, 0.12);
+    box-shadow: 0 8px 30px rgba(2, 6, 23, 0.08);
+    transition: right .18s ease-in-out, box-shadow .18s ease;
+    padding: 14px 16px;
     z-index: 80;
     overflow: auto;
-    border-radius: 8px 0 0 8px;
+    border-radius: 10px 0 0 10px;
   }
 
   #proof-sidebar.open {
     right: 16px;
   }
 
+  /* 关闭按钮使用绿色系 */
   #proof-sidebar .close-btn {
     position: absolute;
-    right: 8px;
-    top: 8px;
-    background: #ef4444;
+    right: 12px;
+    top: 12px;
+    background: #10b981;
     color: #fff;
     border: none;
     padding: 6px 8px;
@@ -684,14 +716,15 @@ permalink: /putnam_2025_b3/
   }
 
   #proof-sidebar .close-btn:hover {
-    background: #dc2626;
+    background: #059669;
   }
 
+  /* 标题样式偏绿色 */
   #proof-sidebar h3 {
     margin: 0 0 8px 0;
     font-size: 1rem;
-    color: #1e293b;
-    border-bottom: 1px solid #e2e8f0;
+    color: #064e3b;
+    border-bottom: 1px solid rgba(16,185,129,0.12);
     padding-bottom: 8px;
   }
 
@@ -700,25 +733,26 @@ permalink: /putnam_2025_b3/
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
     font-size: 0.6rem;
     line-height: 1.45;
-    color: #0b1220;
+    color: #052e22;
     padding-top: 8px;
     overflow-wrap: break-word;
   }
 
-  /* 高亮被点击的节点 */
+  /* 高亮被点击的节点（保留现有行为） */
   .node-name.highlighted {
-    background-color: rgba(59, 130, 246, 0.2);
+    background-color: rgba(16, 185, 129, 0.12);
     border-radius: 4px;
     padding: 2px 4px;
     transition: background-color 0.2s;
   }
 
+  /* sorry/apply? 高亮保持粉色以便区分 */
   .sorry-highlight {
-    background-color: rgba(255, 182, 193, 0.3); /* 淡粉色/淡红色背景 */
+    background-color: rgba(255, 182, 193, 0.35);
     padding: 1px 3px;
     border-radius: 3px;
-    color: #d63384; /* 可选：改变文字颜色 */
-    font-weight: bold;
+    color: #b91c52;
+    font-weight: 700;
   }
 </style>
 
